@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+
+.home {
+    text-align: center;
+    position: relative;
+    height: calc(100vh - 64px);
+    background-image: url('/home.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.home-phrase {
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
