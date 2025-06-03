@@ -7,7 +7,7 @@ const LoginPage = ({ onLoginStateChange }) => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
+    const [error, setError] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -16,6 +16,8 @@ const LoginPage = ({ onLoginStateChange }) => {
         //     onLoginStateChange(true);
         //     navigate('/');
         // }
+        setError('');
+
         try{
             const response = await fetch("http://localhost:5000/api/login", {
                 method:"POST",
@@ -33,7 +35,7 @@ const LoginPage = ({ onLoginStateChange }) => {
                 onLoginStateChange(true);
                 navigate('/');
             }else{
-                setError(data.message || "로그인 실패");
+                setError('사용자 이름이나 비밀번호가 틀립니다.');
             }
         }catch(e){
             setError("서버 오류가 발생했습니다.");
@@ -65,7 +67,7 @@ const LoginPage = ({ onLoginStateChange }) => {
                             required 
                         />
                     </div>
-                    {error && <div>{error}</div>}
+                    {error && <div className="error-message">{error}</div>}
                     <button type="submit" className='login-button'>Login</button>
                 </form>
             </div>

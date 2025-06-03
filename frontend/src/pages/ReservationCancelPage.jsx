@@ -7,6 +7,20 @@ const ReservationCancelPage = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [error, setError] = useState(null);
 
+    const deleteExpiredReservation = async (reservation) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/cancel/${reservation.id}`, {
+                method: "DELETE"
+            });
+            const data = await response.json();
+            if (!data.success) {
+                console.error("만료된 예약 삭제 실패:", reservation.id);
+            }
+        } catch (e) {
+            console.error("만료된 예약 삭제 중 오류:", e);
+        }
+    };
+
     useEffect(() => {
         const fetchReservations = async () => {
             const userId = localStorage.getItem("user_id");
@@ -14,7 +28,27 @@ const ReservationCancelPage = () => {
                 const response = await fetch(`http://localhost:5000/api/cancel?user_id=${userId}`);
                 const data = await response.json();
                 if (data.success) {
-                    setReservations(data.reservations);
+                    // 현재 날짜
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+
+                    // 만료된 예약 필터링 및 삭제
+                    const validReservations = [];
+                    for (const reservation of data.reservations) {
+                        const dateStr = reservation.date;
+                        const year = parseInt(dateStr.split('년')[0]);
+                        const month = parseInt(dateStr.split('년')[1].split('월')[0]) - 1;
+                        const day = parseInt(dateStr.split('월')[1].split('일')[0]);
+                        const reservationDate = new Date(year, month, day);
+
+                        if (reservationDate >= today) {
+                            validReservations.push(reservation);
+                        } else {
+                            // 만료된 예약 삭제
+                            await deleteExpiredReservation(reservation);
+                        }
+                    }
+                    setReservations(validReservations);
                 }
             } catch (e) {
                 setError("서버 오류가 발생했습니다.");
