@@ -47,7 +47,7 @@ const LoginPage = ({ onLoginStateChange }) => {
             <div className="login-content">
                 <h2>Login</h2>
                 <form onSubmit={handleSubmit} className="login-form">
-                    <div className="form-group">
+                    <div className="form">
                         <label>Username:</label>
                         <input 
                             type="text" 
@@ -56,7 +56,7 @@ const LoginPage = ({ onLoginStateChange }) => {
                             required 
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form">
                         <label>Password:</label>
                         <input 
                             type="password" 

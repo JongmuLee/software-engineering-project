@@ -11,7 +11,7 @@ const HomePage = () => {
 
     return (
         <div className="home">
-            <h1 className="home-phrase">Lorem Ipsum</h1>
+            <h1 className="home-phrase">Make your day<br /> special</h1>
         </div>
     );
 };

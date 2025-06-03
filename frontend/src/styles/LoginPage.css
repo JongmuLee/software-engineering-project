@@ -34,18 +34,18 @@
     gap: 20px;
 }
 
-.form-group {
+.form {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.form-group label {
+.form label {
     font-weight: bold;
     color: #333;
 }
 
-.form-group input {
+.form input {
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 4px;

@@ -1,4 +1,4 @@
-import { useState ,useEffect} from 'react';
+import { useState, useEffect } from 'react';
 // import { getReservations, updateReservations } from '../components/ReservationData';
 import '../styles/ReservationCancelPage.css';
 
@@ -8,21 +8,21 @@ const ReservationCancelPage = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchReservations = async() => {
+        const fetchReservations = async () => {
             const userId = localStorage.getItem("user_id");
-            try{
+            try {
                 const response = await fetch(`http://localhost:5000/api/cancel?user_id=${userId}`);
                 const data = await response.json();
-                if(data.success){
+                if (data.success) {
                     setReservations(data.reservations);
                 }
-            }catch(e){
+            } catch (e) {
                 setError("서버 오류가 발생했습니다.");
                 console.error(e);
             }
         };
         fetchReservations();
-    },[]);
+    }, []);
 
     const handleCancel = async (reservation) => {
         // 예약 날짜
@@ -31,7 +31,7 @@ const ReservationCancelPage = () => {
         const month = parseInt(dateStr.split('년')[1].split('월')[0]) - 1;
         const day = parseInt(dateStr.split('월')[1].split('일')[0]);
         const reservationDate = new Date(year, month, day);
-        
+
         // 오늘 날짜
         const today = new Date();
         today.setHours(0, 0, 0, 0);
@@ -45,19 +45,19 @@ const ReservationCancelPage = () => {
             // setReservations(updatedReservations);
             // updateReservations(updatedReservations);  // ReservationPage의 reservations도 업데이트
             // setShowPopup(true);
-            try{
-                const response = await fetch(`http://localhost:5000/api/cancel/${reservation.id}`,{
-                    method:"DELETE"
+            try {
+                const response = await fetch(`http://localhost:5000/api/cancel/${reservation.id}`, {
+                    method: "DELETE"
                 });
                 const data = await response.json();
-                if(data.success){
+                if (data.success) {
                     const updatedReservations = reservations.filter(r => r.id !== reservation.id);
                     setReservations(updatedReservations);
                     setShowPopup(true);
-                }else{
+                } else {
                     setError(data.message || "취소 실패")
                 }
-            }catch(e){
+            } catch (e) {
                 setError("서버 오류가 발생했습니다.");
                 console.error(e);
             }
@@ -82,7 +82,7 @@ const ReservationCancelPage = () => {
                             <div className="cancel-section">
                                 <p className="cancel-notice">예약은 하루 전에만 취소가 가능합니다. 정말로 취소하시겠습니까?</p>
                                 {error && <div>{error}</div>}
-                                <button 
+                                <button
                                     className="cancel-button"
                                     onClick={() => handleCancel(reservation)}
                                 >
@@ -95,10 +95,8 @@ const ReservationCancelPage = () => {
             </div>
             {showPopup && (
                 <div className="popup">
-                    <div className="popup-content">
-                        <p>예약이 정상적으로 취소되었습니다.</p>
-                        <button onClick={() => setShowPopup(false)}>확인</button>
-                    </div>
+                    <p>예약이 정상적으로 취소되었습니다.</p>
+                    <button onClick={() => setShowPopup(false)}>확인</button>
                 </div>
             )}
         </div>

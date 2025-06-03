@@ -44,7 +44,7 @@ const SignUpPage = () => {
             <div className="signup-content">
                 <h2>Sign Up</h2>
                 <form onSubmit={handleSubmit} className="signup-form">
-                    <div className="form-group">
+                    <div className="form">
                         <label>Username:</label>
                         <input
                             type="text"
@@ -53,7 +53,7 @@ const SignUpPage = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form">
                         <label>Email:</label>
                         <input
                             type="email"
@@ -62,7 +62,7 @@ const SignUpPage = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form">
                         <label>Password:</label>
                         <input
                             type="password"
