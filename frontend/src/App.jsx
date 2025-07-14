@@ -64,14 +64,14 @@ function App() {
           <div className="footer_address">
             <div className="address-box">
               <dl>
-                <dt>충무로점</dt>
-                <dd>04620 서울특별시 중구로 1길 30 동국대학교 옆</dd>
-                <dd>TEL : 02-2260-3114</dd>
+                <dt>충무로점</dt>  // 위치
+                <dd>04620 서울특별시 중구로 1길 30 동국대학교 옆</dd> // 주소
+                <dd>TEL : 02-2260-3114</dd> // 전화번호
               </dl>
               <dl>
-                <dt>남산타워점</dt>
-                <dd>04340 서울 용산구 남산공원길 105</dd>
-                <dd>TEL : 02-756-2486</dd>
+                <dt>남산타워점</dt>  // 위치
+                <dd>04340 서울 용산구 남산공원길 105</dd>  // 주소
+                <dd>TEL : 02-756-2486</dd>  // 전화번호
               </dl>
             </div>
             <div className="nav-logo"><Link to="/">DGK Dining</Link></div>
